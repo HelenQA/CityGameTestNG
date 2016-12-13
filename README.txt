@@ -1,1 +1,1 @@
-This is study application demonstrates game "City Game".
+This is study application demonstrates game "City Game" with TestNG tests.
