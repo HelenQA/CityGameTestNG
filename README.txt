@@ -1,0 +1,1 @@
+This is study application demonstrates game "City Game".
