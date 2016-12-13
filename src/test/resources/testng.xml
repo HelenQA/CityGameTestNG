@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1">
+	<parameter name="cityName" value="МИНСК;НОРИЛЬСК;КАЗАНЬ" />
+	<parameter name="NumOfCities" value="1" />
+	<parameter name="cityFirstChar" value="М;Н;К" />
+	<parameter name="cityLastChar" value="К;К;Н" />
+	<test name="Test of CitySet class">
+		<classes>
+			<class name="by.htp.cityname.entity.CitySetTest" />
+		</classes>
+	</test>
+	<test name="Test of City class">
+		<classes>
+			<class name="by.htp.cityname.entity.CityTest" />
+		</classes>
+	</test>
+</suite>

@@ -1,49 +1,53 @@
 package by.htp.cityname.entity;
 
-import static org.junit.Assert.*;
+
 
 import java.util.Iterator;
 
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
-import org.junit.Test;
 
-import by.htp.cityname.runner.Configurator;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class CitySetTest {
 
 	public static CitySet cities;
-	public static String cityName1 = Configurator.getKey("city1Name");
 	public static City city1;
 	public static City city2;
-	public static int NumOfCities = 1;
 
 	@BeforeClass
-	public static void OnlyOnce() {
+	@Parameters({"cityName"})
+	public static void OnlyOnce(String cityName) {
+		String[] name = cityName.split(";");
 		cities = new CitySet();
-		city1 = new City(cityName1);
+		city1 = new City(name[0].trim());
 		cities.addCity(city1);
 		city2 = null;
 	}
 	
 	@Test
 	public void tstCityAdd() {
-		assertFalse("city2 not added",cities.addCity(city2));
+		Assert.assertFalse(cities.addCity(city2), "city2 not added");
 	}
 	
 	@Test
-	public void tstCityNumberOfElements() {
-		assertEquals("Number of cities", NumOfCities, cities.numberOfElements());
+	@Parameters({"NumOfCities"})
+	public void tstCityNumberOfElements(int NumOfCities) {
+		Assert.assertEquals(NumOfCities, cities.numberOfElements(), "Number of cities");
 	}
 	
 	@Test
 	public void tstCityRemove() {
-		assertTrue("city1 removed", cities.removeCity(city1));
+		Assert.assertTrue(cities.removeCity(city1), "city1 removed");
 	}
 	
 	@Test
-	public void tstCityContains(){
-		assertTrue("city1 in cities", cities.containsCity(new City(cityName1)));
+	@Parameters({"cityName"})
+	public void tstCityContains(String cityName){
+		String[] name = cityName.split(";");
+		Assert.assertTrue(cities.containsCity(new City(name[0].trim())), "city1 in cities");
 	}
 	
 	@Test
@@ -54,7 +58,7 @@ public class CitySetTest {
 			index++;
 			if (index == 20) {break;}
 		}
-		assertEquals("TROUBLE WITH ITERATOR", cities.numberOfElements(),index);
+		Assert.assertEquals(index, cities.numberOfElements(), "TROUBLE WITH ITERATOR");
 	}
 	
 	@AfterClass
